@@ -36,8 +36,8 @@ class LowpassFilter(object):
 class Reverb(object):
 
     def __init__(self):
-        self.delay = 1000
-        self.decay = 1
+        self.delay = 256
+        self.decay = 5
 
     def get_effected_signal(self, signal):
         rev = np.roll(signal, self.delay) * self.decay

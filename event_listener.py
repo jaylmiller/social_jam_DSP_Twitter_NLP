@@ -6,7 +6,8 @@ import pygame as pg
 from global_vars import *
 from effects import *
 
-KEYS = {pg.K_1 : LowpassFilter}
+KEYS = {pg.K_1 : LowpassFilter
+        pg.K_2 : Reverb}
 
 def event_listen_keyboard():
     for event in pg.event.get():
