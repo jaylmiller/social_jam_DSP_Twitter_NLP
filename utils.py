@@ -6,8 +6,8 @@ import numpy as np
 
 
 def decode(data):
-	return np.fromstring(data, dtype='Float32')
+	return np.frombuffer(data, dtype=np.float32)
 
 
 def encode(signal):
-	return signal.astype(np.float32).tostring()
+	return np.getbuffer(signal)

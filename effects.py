@@ -13,9 +13,10 @@ class LowpassFilter(object):
 
     pass_band_loss = 1 # max loss in passing band (dB)
     stop_band_loss = 30 # min loss in stopping band (dB)
+    order = 50
     
-    def __init__(self, cut_off_freq=1000):
-        self.a = 0.
+    def __init__(self, cut_off_freq=500):
+        self.a = [1.0]
         self.b = 0.
         self.set_params(cut_off_freq=cut_off_freq)
 
@@ -26,11 +27,8 @@ class LowpassFilter(object):
 
     def set_params(self, **kwargs):
         f = kwargs['cut_off_freq']
-        normalized_pass = f/(RATE*.5)
-        normalized_stop = (f+.3*f)/(RATE*.5)
-        (self.b, self.a) = signal.iirdesign(normalized_pass, normalized_stop, 
-                                LowpassFilter.pass_band_loss, 
-                                LowpassFilter.stop_band_loss)
+        self.b = signal.firwin(LowpassFilter.order, cutoff = f, window = "hamming",
+                               nyq=RATE*.5)
 
 
 
