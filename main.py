@@ -14,13 +14,11 @@ from global_vars import *
 
 
 def callback(in_data, frame_count, time_info, status):
-    #if len(ACTIVE_FX) == 0:
-    #    return (in_data, pyaudio.paContinue)
+    if len(ACTIVE_FX) == 0:
+        return (in_data, pyaudio.paContinue)
 
     signal = decode(in_data)
-    print signal
-    #max_amp = np.max(np.absolute(signal))
-    #signal = signal/max_amp
+    
     for effect in ACTIVE_FX:
         signal = effect.get_effected_signal(signal)
     return (encode(signal), pyaudio.paContinue)
