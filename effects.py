@@ -1,5 +1,6 @@
 import numpy as np
 import scipy.signal as signal
+from global_vars import *
 
 """
 All effects must implement: 
@@ -10,23 +11,28 @@ All effects must implement:
 
 class LowpassFilter(object):
 
-    pass_band_loss = 2 # max loss in passing band (dB)
+    pass_band_loss = 1 # max loss in passing band (dB)
     stop_band_loss = 30 # min loss in stopping band (dB)
     
-    
-    def __init__(cut_off_freq):
-        this.a = 0.
-        this.b = 0.
-        this.set_cut_off(cut_off_freq)
+    def __init__(self, cut_off_freq=1000):
+        self.a = 0.
+        self.b = 0.
+        self.set_params(cut_off_freq=cut_off_freq)
 
 
-    def get_effected_signal(signal):
-        return signal.lfilter(this.b, this.a, signal)
+    def get_effected_signal(self, sig):
+        return signal.lfilter(self.b, self.a, sig)
 
 
-    def set_params(**kwargs):
-        normalized_pass = kwargs['cut_off_freq']/((RATE/1000.)*.5)
-        normalized_stop = normalized_pass+.1*normalized_pass
-        order, nat_freq = signal.buttord(normalized_pass, normalized_stop,
-                                         pass_band_loss, stop_band_loss)
-        this.b, this.a = signal.butter(order, nat_freq, btype='low')
+    def set_params(self, **kwargs):
+        f = kwargs['cut_off_freq']
+        normalized_pass = f/(RATE*.5)
+        normalized_stop = (f+.3*f)/(RATE*.5)
+        (self.b, self.a) = signal.iirdesign(normalized_pass, normalized_stop, 
+                                LowpassFilter.pass_band_loss, 
+                                LowpassFilter.stop_band_loss)
+
+
+
+
+ALL_FX = [LowpassFilter]

@@ -14,10 +14,15 @@ from global_vars import *
 
 
 def callback(in_data, frame_count, time_info, status):
+    if len(ACTIVE_FX) == 0:
+        return (in_data, pyaudio.paContinue)
+
     signal = decode(in_data)
-    # TODO: Process FX chain here
-    out_data = encode(signal)
-    return (out_data, pyaudio.paContinue)
+
+    for effect in ACTIVE_FX:
+        signal = effect.get_effected_signal(signal)
+
+    return (encode(signal), pyaudio.paContinue)
 
 
 def main():
@@ -30,16 +35,20 @@ def main():
     stream = p.open(format=p.get_format_from_width(WIDTH),
                     channels=CHANNELS,
                     rate=RATE,
+                    frames_per_buffer = BUFFER_SIZE,
                     input=True,
                     output=True,
                     stream_callback=callback)
 
     stream.start_stream()
 
-    while stream.is_active():
-        if event_listener.event_listen_keyboard():
-            break
-        time.sleep(0.1)
+    try:
+        while stream.is_active():
+            if event_listener.event_listen_keyboard():
+                break
+            time.sleep(1)
+    except KeyboardInterrupt:
+        pass
 
     stream.stop_stream()
     stream.close()
