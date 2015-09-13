@@ -14,10 +14,12 @@ from global_vars import *
 
 
 def callback(in_data, frame_count, time_info, status):
-    if len(ACTIVE_FX) == 0:
-        return (in_data, pyaudio.paContinue)
+    #if len(ACTIVE_FX) == 0:
+    #    return (in_data, pyaudio.paContinue)
 
     signal = decode(in_data)
+    
+    print pitch_detect_fft_bins(signal), pitch_detect_zero_crossing(signal)
 
     for effect in ACTIVE_FX:
         signal = effect.get_effected_signal(signal)
