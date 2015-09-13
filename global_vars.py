@@ -7,7 +7,9 @@ WIDTH = 2
 CHANNELS = 1
 BUFFER_SIZE = 4096
 RATE = 44100
-ACTIVE_FX = [] # effects curently on
+ALL_FX = ["Lowpass Filter", "Highpass Filter", "Delay", "Tremolo", "Chorus",
+    "Harmonizer", "Distortion", "Wah", "Popcorn", "Sci-Fi Delay"]
+ACTIVE_FX = {}
 
 pitches = np.array([55.00, 58.27, 61.74,
    65.41, 69.30, 73.42, 77.78, 82.41, 87.31, 92.50, 98.00, 103.8, 110.0, 116.5, 123.5,

@@ -68,7 +68,7 @@ class Wah(object):
 		self.it = 0
 
 
-class Reverb(object):
+class Delay(object):
 
 	def __init__(self, predelay=512, wet=8, decay=0.25):
 		self.set_params(predelay=predelay, wet=wet, decay=decay)
@@ -186,7 +186,7 @@ class Popcorn(object):
 		self.speed = kwargs['speed']
 		self.phase = time.clock() * self.speed
 
-class Clipping(object):
+class Distortion(object):
     
     def __init__(self, threshold=.1):
         self.set_params(threshold=threshold)
@@ -198,6 +198,3 @@ class Clipping(object):
     def set_params(self, **kwargs):
         self.threshold = kwargs['threshold']
 
-
-ALL_FX = [LowpassFilter, Reverb, Tremolo, Harmonizer,
-		  SciFiDelay, Chorus, Popcorn, Clipping, Wah]

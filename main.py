@@ -21,11 +21,12 @@ def callback(in_data, frame_count, time_info, status):
 
     for effect in ACTIVE_FX:
         signal = effect.get_effected_signal(signal)
-        
+
     return (encode(signal), pyaudio.paContinue)
 
 
 def main():
+    url = sys.argv[1]
     p = pyaudio.PyAudio()
     
     pg.init() # take this out later
@@ -47,6 +48,7 @@ def main():
             if event_listener.event_listen_keyboard():
                 break
             time.sleep(5)
+            event_listener.get_web_info("http://52.89.3.50/settings/examine/")
     except KeyboardInterrupt:
         pass
 
