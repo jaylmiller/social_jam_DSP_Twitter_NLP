@@ -2,6 +2,7 @@ import time
 import numpy as np
 import scipy.signal as signal
 import scipy.io.wavfile
+import scipy.stats as stats
 from global_vars import *
 from utils import *
 
@@ -153,6 +154,18 @@ class Popcorn(object):
 	def set_params(self, **kwargs):
 		self.speed = kwargs['speed']
 		self.phase = time.clock() * self.speed
+
+class Clipping(object):
+    
+    def __init__(self, threshold=.6):
+        self.set_params(threshold=threshold)
+    
+    def get_effected_signal(self, signal):
+        signal = stats.threshold(signal, -self.threshold, self.threshold)
+        return (1.0/float(self.threshold))*signal
+
+    def set_params(self, **kwargs):
+        self.threshold = kwargs['threshold']
 
 
 ALL_FX = [LowpassFilter, Reverb, Tremolo, Harmonizer,
