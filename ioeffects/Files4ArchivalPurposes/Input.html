@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Website ">
+    <meta name="author" content="Trevor Aron">
+
+    <title>IO Filter</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="slider.css">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <!-- Static navbar -->
+    <nav class="navbar navbar-default navbar-static-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand">IO Filter</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="http://getbootstrap.com/examples/navbar-static-top/#">Home</a></li>
+            <li><a href="http://getbootstrap.com/examples/navbar-static-top/#about">About</a></li>
+            <li class="active"><a href="http://getbootstrap.com/examples/navbar-static-top/#contact">Change Settings</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+    <div class="jumbotron">
+        <div class="container">
+            <div class="text-center">
+                <h1> Settings </h1>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <form>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="text-center">
+                    <h1> REVERB </h1>
+                    <span style="font-size:5.5em;" class="glyphicon glyphicon-ok-circle"></span>
+                    <div class="range">
+                        <input type="range" name="range" min="1" max="100" value="50">
+                    </div>
+                    <div class="radio">
+                        <label class="radio-inline">
+                            <input type="radio" name="Status" value="OFF"> 
+                            <span style="font-size:3.5em;" class="glyphicon glyphicon-remove-circle"></span>
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="Status" value="ON">
+                            <span style="font-size:3.5em;" class="glyphicon glyphicon-ok-circle"></span>
+                    </label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="text-center">
+                    <h1> DISTORTION </h1>
+                    <span style="font-size:5.5em;" class="glyphicon glyphicon-ok-circle"></span>
+                    <div class="range">
+                        <input type="range" name="range" min="1" max="100" value="50">
+                    </div>
+                    <div class="radio">
+                        <label class="radio-inline">
+                            <input type="radio" name="Status" value="OFF"> 
+                            <span style="font-size:3.5em;" class="glyphicon glyphicon-remove-circle"></span>
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="Status" value="ON">
+                            <span style="font-size:3.5em;" class="glyphicon glyphicon-ok-circle"></span>
+                    </label>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-4">
+                <div class="text-center">
+                    <h1> DELAY </h1>
+                    <span style="font-size:5.5em;" class="glyphicon glyphicon-remove-circle"></span>
+                    <div class="range">
+                        <input type="range" name="range" min="1" max="100" value="50">
+                    </div>
+                    <div class="radio">
+                        <label class="radio-inline">
+                            <input type="radio" name="Status" value="OFF"> 
+                            <span style="font-size:3.5em;" class="glyphicon glyphicon-remove-circle"></span>
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="Status" value="ON">
+                            <span style="font-size:3.5em;" class="glyphicon glyphicon-ok-circle"></span>
+                        </label>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+         <div class="row">
+            <div class="col-md-4">
+                <div class="text-center">
+                    <h1> WAH WAH </h1>
+                    <span style="font-size:5.5em;" class="glyphicon glyphicon-remove-circle"></span>
+                    <div class="range">
+                        <input type="range" name="range" min="1" max="100" value="50">
+                    </div>
+                    <div class="radio">
+                        <label class="radio-inline">
+                            <input type="radio" name="Status" value="OFF"> 
+                            <span style="font-size:3.5em;" class="glyphicon glyphicon-remove-circle"></span>
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="Status" value="ON">
+                            <span style="font-size:3.5em;" class="glyphicon glyphicon-ok-circle"></span>
+                    </label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="text-center">
+                    <h1> BIT CRUSHER </h1>
+                    <span style="font-size:5.5em;" class="glyphicon glyphicon-ok-circle"></span>
+                    <div class="range">
+                        <input type="range" name="range" min="1" max="100" value="50">
+                    </div>
+                    <div class="radio">
+                        <label class="radio-inline">
+                            <input type="radio" name="Status" value="OFF"> 
+                            <span style="font-size:3.5em;" class="glyphicon glyphicon-remove-circle"></span>
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="Status" value="ON">
+                            <span style="font-size:3.5em;" class="glyphicon glyphicon-ok-circle"></span>
+                    </label>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-4">
+                <div class="text-center">
+                    <h1> LOW PASS </h1>
+                    <span style="font-size:5.5em;" class="glyphicon glyphicon-remove-circle"></span>
+                    <div class="range">
+                        <input type="range" name="range" min="1" max="100" value="50">
+                    </div>
+                    <div class="radio">
+                        <label class="radio-inline">
+                            <input type="radio" name="Status" value="OFF"> 
+                            <span style="font-size:3.5em;" class="glyphicon glyphicon-remove-circle"></span>
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="Status" value="ON">
+                            <span style="font-size:3.5em;" class="glyphicon glyphicon-ok-circle"></span>
+                        </label>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+          </div>
+          <div class="col-md-4">
+              <div class="text-center">
+                  <h1> TWITTER EFFECTS </h1>
+                  <span style="font-size:5.5em;" class="glyphicon glyphicon-ok-circle"></span>
+                  <div class="radio">
+                      <label class="radio-inline">
+                          <input type="radio" name="Status" value="OFF"> 
+                          <span style="font-size:3.5em;" class="glyphicon glyphicon-remove-circle"></span>
+                      </label>
+                      <label class="radio-inline">
+                          <input type="radio" name="Status" value="ON">
+                          <span style="font-size:3.5em;" class="glyphicon glyphicon-ok-circle"></span>
+                  </label>
+                  </div>
+              </div>
+
+          </div>
+          <div class="col-md-4">
+          </div>
+        </div>       
+        </form>
+    </div>
+
+</body><div></div><div></div></html>
