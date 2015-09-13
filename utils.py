@@ -15,6 +15,10 @@ def encode(signal):
     return signal.astype(np.float32).tostring()
 
 
+"""
+Detect pitch by matching the highest amplitude
+frequenct in the DFT with the pitch for a musical note.
+"""
 def pitch_detect_fft_bins(signal):
     dft = np.fft.rfft(signal, BUFFER_SIZE)
     dft = np.absolute(dft)
@@ -24,6 +28,10 @@ def pitch_detect_fft_bins(signal):
     return pitches[index]
 
 
+"""
+Detect pitch using zero crossing rate average and removing noise
+by adding a threshold
+"""
 def pitch_detect_zero_crossing(signal):
     diff_threshold = 50
     zero_crossings = np.where(np.diff(np.signbit(signal)))[0]

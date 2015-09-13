@@ -35,14 +35,83 @@ class LowpassFilter(object):
 
 class Reverb(object):
 
-    def __init__(self, delay=256, decay=5):
-        self.delay = delay
+    def __init__(self):
+        self.snap = scipy.io.wavfile.read("reverbsnap.wav")[1]
+        self.slices = len(self.snap) // BUFFER_SIZE
+        self.chunk = 0
+
+    def get_effected_signal(self, sig):
+        if np.average(sig) < 2e-5:
+            return sig
+        if self.chunk >= self.slices:
+            self.chunk = 0
+        start = BUFFER_SIZE * self.chunk
+        out = signal.fftconvolve(sig, self.snap[start : start + BUFFER_SIZE])
+        self.chunk += 1
+        return out
+
+    """
+    def __init__(self, predelay=512, wet=8, decay=0.25):
+        self.predelay = predelay
+        self.wet = wet
         self.decay = decay
+        self.iterations = 0
+
+    def reverb(self, signal):
+        if self.iterations == self.wet:
+            self.iterations = 0
+            return np.zeros(BUFFER_SIZE)
+        else:
+            out = np.roll(signal, self.predelay // (2 ** self.iterations))
+            out[0 : self.predelay] = 0
+            self.iterations += 1
+            out += (self.reverb(out) * self.decay)
+            #print out
+            return out
+
 
     def get_effected_signal(self, signal):
-        rev = np.roll(signal, self.delay) * self.decay
-        rev[0 : self.delay - 1] = 0
-        return signal + rev
+        return self.reverb(signal) + (signal * (self.decay / (2 ** self.wet)))
+    """
+
+class SciFiDelay(object):
+
+    def __init__(self, sampleDelay=512, ratio=0.75):
+        self.sampleDelay = sampleDelay
+        self.ratio = ratio
+        self.nSamples = 256
+        self.echoes = (BUFFER_SIZE // sampleDelay) - 1
+
+    def get_effected_signal(self, signal):
+        chunk = signal[0 : self.nSamples]
+        delay = np.zeros(BUFFER_SIZE)
+        starts = (np.arange(self.echoes) + 1) * self.sampleDelay
+        slices = np.array([starts, starts + self.nSamples])
+        for i in range(self.echoes):
+            delay[slices[0,i] : slices[1,i]] = chunk * (self.echoes - i)
+        return signal + delay
+
+    """
+    TODO: Add set_params(self, **kwargs) method
+    """
+
+
+class Chorus(object):
+
+    def __init__(self, phase1=0.1, phase2=0.75):
+        self.phase1 = phase1
+        self.phase2 = phase2
+        self.mod1 = np.sin(np.linspace(0 + phase1, 10 * m.pi + phase1,
+            num=BUFFER_SIZE, endpoint=True))
+        self.mod2 = np.sin(np.linspace(0 + phase2, 10 * m.pi + phase2,
+            num=BUFFER_SIZE, endpoint=True))
+
+    def get_effected_signal(self, signal):
+        return 0.5 * signal * (1 + self.mod1 + self.mod2)
+
+    """
+    TODO: Add set_params(self, **kwargs) method
+    """
 
 
 class Tremolo(object):
@@ -81,4 +150,21 @@ class Harmonizer(object):
         self.wetness = wetness
 
 
-ALL_FX = [LowpassFilter, Reverb, Tremolo, Harmonizer]
+class Popcorn(object):
+
+    def __init__(self, speed=500):
+        self.speed = speed
+        self.phase = time.clock() * self.speed
+
+    def get_effected_signal(self, signal):
+        print m.sin(time.clock() * self.speed)
+        shifted = np.roll(signal, int(100 * m.sin(time.clock() * self.speed)))
+        return signal + shifted
+
+    """
+    TODO: Add set_params(self, **kwargs) method
+    """
+
+
+ALL_FX = [LowpassFilter, Reverb, Tremolo, Harmonizer,
+          SciFiDelay, Chorus, Popcorn]
