@@ -3,6 +3,7 @@ Utility functions
 """
 
 import numpy as np
+import scipy.signal as signal
 
 
 def decode(data):
@@ -10,4 +11,4 @@ def decode(data):
 
 
 def encode(signal):
-	return np.getbuffer(signal)
+	return signal.astype(np.float32).tostring()

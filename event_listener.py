@@ -7,7 +7,8 @@ from global_vars import *
 from effects import *
 
 KEYS = {pg.K_1 : LowpassFilter,
-        pg.K_2 : Reverb}
+        pg.K_2 : Reverb,
+        pg.K_3 : Tremolo}
 
 def event_listen_keyboard():
     for event in pg.event.get():

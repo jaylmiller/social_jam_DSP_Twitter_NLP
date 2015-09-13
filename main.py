@@ -18,7 +18,7 @@ def callback(in_data, frame_count, time_info, status):
         return (in_data, pyaudio.paContinue)
 
     signal = decode(in_data)
-    
+
     for effect in ACTIVE_FX:
         signal = effect.get_effected_signal(signal)
     return (encode(signal), pyaudio.paContinue)
@@ -45,7 +45,7 @@ def main():
         while stream.is_active():
             if event_listener.event_listen_keyboard():
                 break
-            time.sleep(1)
+            time.sleep(5)
     except KeyboardInterrupt:
         pass
 
