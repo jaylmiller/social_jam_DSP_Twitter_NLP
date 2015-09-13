@@ -21,6 +21,7 @@ def callback(in_data, frame_count, time_info, status):
 
     for effect in ACTIVE_FX:
         signal = effect.get_effected_signal(signal)
+        
     return (encode(signal), pyaudio.paContinue)
 
 

@@ -102,9 +102,9 @@ class Chorus(object):
     def __init__(self, phase1=0.1, phase2=0.75):
         self.phase1 = phase1
         self.phase2 = phase2
-        self.mod1 = np.sin(np.linspace(0 + phase1, 10 * m.pi + phase1,
+        self.mod1 = np.sin(np.linspace(0 + phase1, 10 * np.pi + phase1,
             num=BUFFER_SIZE, endpoint=True))
-        self.mod2 = np.sin(np.linspace(0 + phase2, 10 * m.pi + phase2,
+        self.mod2 = np.sin(np.linspace(0 + phase2, 10 * np.pi + phase2,
             num=BUFFER_SIZE, endpoint=True))
 
     def get_effected_signal(self, signal):
@@ -147,6 +147,7 @@ class Harmonizer(object):
     def get_effected_signal(self, signal):
         signal = signal + self.wetness*pitch_shift(signal, 
                                                    self.interval)
+        return signal
 
     """def set_params(self, **kwargs):
         self.interval = inty
@@ -160,8 +161,8 @@ class Popcorn(object):
         self.phase = time.clock() * self.speed
 
     def get_effected_signal(self, signal):
-        print m.sin(time.clock() * self.speed)
-        shifted = np.roll(signal, int(100 * m.sin(time.clock() * self.speed)))
+        print np.sin(time.clock() * self.speed)
+        shifted = np.roll(signal, int(100 * np.sin(time.clock() * self.speed)))
         return signal + shifted
 
     """
