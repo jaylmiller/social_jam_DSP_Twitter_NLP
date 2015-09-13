@@ -66,4 +66,19 @@ class Tremolo(object):
         self.sin_wave = self.sin_wave*intensity
         self.sin_wave = self.sin_wave + (1-intensity)
 
-ALL_FX = [LowpassFilter, Reverb, Tremolo]
+
+class Harmonizer(object):
+
+    def __init__(self, interval='fifth', wetness=.6):
+        self.set_params(interval=interval, wetness=wetness)
+
+    def get_effected_signal(self, signal):
+        signal = signal + self.wetness*pitch_shift(signal, 
+                                                   self.interval)
+
+    def set_params(self, **kwargs):
+        self.interval = interval
+        self.wetness = wetness
+
+
+ALL_FX = [LowpassFilter, Reverb, Tremolo, Harmonizer]
