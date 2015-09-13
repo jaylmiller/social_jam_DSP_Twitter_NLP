@@ -51,7 +51,6 @@ class Tremolo(object):
         self.length = RATE/freq
         factor = float(freq) * np.pi * 2.0 / float(RATE)
         self.sin_wave = np.sin(np.arange(self.length) * factor)
-        print self.sin_wave
         self.sin_wave = np.absolute(self.sin_wave)
         self.sin_wave = self.sin_wave*intensity
         self.sin_wave = self.sin_wave + (1-intensity)
@@ -62,7 +61,6 @@ class Tremolo(object):
             w = np.append(w, self.sin_wave)
         self.sin_wave = np.roll(self.sin_wave, len(w)-len(signal))
         w = w[0:len(signal)]
-        print w
         return signal*w
 
 ALL_FX = [LowpassFilter, Reverb, Tremolo]
