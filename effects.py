@@ -92,10 +92,6 @@ class SciFiDelay(object):
             delay[slices[0,i] : slices[1,i]] = chunk * (self.echoes - i)
         return signal + delay
 
-    """
-    TODO: Add set_params(self, **kwargs) method
-    """
-
 
 class Chorus(object):
 
@@ -110,15 +106,11 @@ class Chorus(object):
     def get_effected_signal(self, signal):
         return 0.5 * signal * (1 + self.mod1 + self.mod2)
 
-    """
-    TODO: Add set_params(self, **kwargs) method
-    """
-
 
 class Tremolo(object):
 
     def __init__(self, freq=2.5, intensity=1.0):
-        self.set_params(freq, intensity)
+        self.set_params(freq=freq, intensity=intensity)
 
     def get_effected_signal(self, signal):
         w = np.array(self.sin_wave)
@@ -129,6 +121,8 @@ class Tremolo(object):
         return signal*w
 
     def set_params(self, **kwargs):
+        freq = kwargs['freq']
+        intensity = kwargs['intensity']
         self.length = RATE/freq
         factor = float(freq) * np.pi * 2.0 / float(RATE)
         self.sin_wave = np.sin(np.arange(self.length) * factor)
@@ -139,19 +133,17 @@ class Tremolo(object):
 
 class Harmonizer(object):
 
-    def __init__(self, inty='fifth', wets=.6):
-        self.interval = 'fifth'
-        self.wetness = wets
-        # self.set_params(inty=inty, wets=wets)
+    def __init__(self, interval='fourth', wetness=.8):
+        self.set_params(interval=interval, wetnesss=wetness)
 
     def get_effected_signal(self, signal):
         signal = signal + self.wetness*pitch_shift(signal, 
                                                    self.interval)
         return signal
 
-    """def set_params(self, **kwargs):
-        self.interval = inty
-        self.wetness = wets"""
+    def set_params(self, **kwargs):
+        self.interval = kwargs['interval']
+        self.wetness = kwargs['wetness']
 
 
 class Popcorn(object):
