@@ -12,8 +12,7 @@ KEYS = {pg.K_1 : LowpassFilter,
         pg.K_4 : Harmonizer,
         pg.K_5 : SciFiDelay,
         pg.K_6 : Chorus,
-        pg.K_7 : Popcorn,
-        pg.K_8 : Distortion}
+        pg.K_7 : Popcorn}
 
 def event_listen_keyboard():
     for event in pg.event.get():
