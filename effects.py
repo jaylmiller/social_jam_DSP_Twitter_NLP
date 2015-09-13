@@ -37,6 +37,37 @@ class LowpassFilter(object):
 											LowpassFilter.stop_band_loss)
 
 
+class Wah(object):
+
+	pass_band_loss = 1  # max loss in passing band (dB)
+	stop_band_loss = 30 # min loss in stopping band (dB)
+	
+	def __init__(self, cut_off_freq=600, osc_freq=2):
+		self.it = 0
+		self.set_params(cut_off_freq=cut_off_freq, osc_freq=osc_freq)
+
+
+	def get_effected_signal(self, sig):
+		if self.it >= 1000:
+			self.it = 0
+		freq = self.f + self.sin_wave[self.it]
+		self.it += 1
+		normalized_pass = freq/(RATE*.5)
+		normalized_stop = (freq+.3*freq)/(RATE*.5)
+		(a, b) = signal.iirdesign(normalized_pass, normalized_stop, 1, 30)
+		out = signal.lfilter(b, a, sig)
+		return out / np.max(out)
+
+
+	def set_params(self, **kwargs):
+		self.osc_freq = kwargs['osc_freq']
+		self.f = kwargs['cut_off_freq']
+		self.sin_wave = (self.f / 4) * np.sin(np.linspace(0,
+			self.osc_freq * 2 * np.pi, num=1000, endpoint=True))
+		self.sin_wave = np.roll(self.sin_wave, -self.it).astype(int)
+		self.it = 0
+
+
 class Reverb(object):
 
 	def __init__(self, predelay=512, wet=8, decay=0.25):
@@ -157,7 +188,7 @@ class Popcorn(object):
 
 class Clipping(object):
     
-    def __init__(self, threshold=.6):
+    def __init__(self, threshold=.1):
         self.set_params(threshold=threshold)
     
     def get_effected_signal(self, signal):
@@ -169,4 +200,4 @@ class Clipping(object):
 
 
 ALL_FX = [LowpassFilter, Reverb, Tremolo, Harmonizer,
-		  SciFiDelay, Chorus, Popcorn]
+		  SciFiDelay, Chorus, Popcorn, Clipping, Wah]
