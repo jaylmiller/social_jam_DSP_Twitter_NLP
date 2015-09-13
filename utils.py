@@ -53,8 +53,8 @@ note interval must be in pitch ratios dict
 def pitch_shift(signal, interval):
     pitch = pitch_detect_zero_crossing(signal)
     new_signal = speed_up(signal, pitch_ratios[interval])
-    return np.append((new_signal, 
-                      np.zeros(len(signal)-len(new_signal))
+    return np.append(new_signal, 
+    				  np.zeros(len(signal)-len(new_signal)))
 
 
     

@@ -1,6 +1,7 @@
 import numpy as np
 import scipy.signal as signal
 from global_vars import *
+from utils import *
 
 """
 All effects must implement: 
@@ -138,16 +139,18 @@ class Tremolo(object):
 
 class Harmonizer(object):
 
-    def __init__(self, interval='fifth', wetness=.6):
-        self.set_params(interval=interval, wetness=wetness)
+    def __init__(self, inty='fifth', wets=.6):
+        self.interval = 'fifth'
+        self.wetness = wets
+        # self.set_params(inty=inty, wets=wets)
 
     def get_effected_signal(self, signal):
         signal = signal + self.wetness*pitch_shift(signal, 
                                                    self.interval)
 
-    def set_params(self, **kwargs):
-        self.interval = interval
-        self.wetness = wetness
+    """def set_params(self, **kwargs):
+        self.interval = inty
+        self.wetness = wets"""
 
 
 class Popcorn(object):
