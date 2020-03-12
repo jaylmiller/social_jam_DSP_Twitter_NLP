@@ -21,7 +21,7 @@ oauthlib==1.0.3
 pep8==1.4.6
 pp==1.6.4
 pprocess==0.5
-psutil==1.2.1
+psutil==5.6.6
 pycups==1.9.66
 pycurl==7.19.3
 pygame==1.9.1release
