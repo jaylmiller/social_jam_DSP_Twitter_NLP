@@ -1,6 +1,6 @@
 Django==1.8.4
 Flask==0.10.1
-Jinja2==2.8
+Jinja2==2.11.3
 MarkupSafe==0.23
 PyAudio==0.2.8
 Werkzeug==0.10.4
