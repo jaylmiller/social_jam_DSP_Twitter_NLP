@@ -14,7 +14,7 @@ gyp==0.1
 html5lib==0.999
 itsdangerous==0.24
 logilab-common==0.61.0
-lxml==3.3.3
+lxml==4.6.3
 nltk==3.0.5
 numpy==1.8.1
 oauthlib==1.0.3
