@@ -11,7 +11,7 @@ chardet==2.0.1
 colorama==0.2.5
 defer==1.0.6
 gyp==0.1
-html5lib==0.999
+html5lib==0.999999999
 itsdangerous==0.24
 logilab-common==0.61.0
 lxml==3.3.3
